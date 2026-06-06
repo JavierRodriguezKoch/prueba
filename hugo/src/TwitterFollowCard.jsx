@@ -1,18 +1,35 @@
-export function TwitterFollowCard({ userName, name, isFollowing }) {
-  const ingSource = 'https://unavatar.io/github/' + userName;
+import { useState } from 'react';
+
+export function TwitterFollowCard({ userName, name }) {
+  const [isFollowing, setIsFollowing] = useState(false);
+  const imgSource = 'https://unavatar.io/github/' + userName;
+  const sexo = isFollowing ? 'Siguiendo' : 'Seguir';
+  const mitocondria = isFollowing
+    ? 'tw-followCard-button is-following'
+    : 'tw-followCard-button';
+
+  const pijita = () => {
+    setIsFollowing((prev) => !prev);
+  };
 
   return (
     <article className="tw-followCard">
-      <header className="tw-followCard-Header">
-        <img className="tw-followCard-Avatar" alt="apana" src={ingSource} />
+      <header className="tw-followCard-header">
+        <img
+          className="tw-followCard-avatar"
+          alt="super apana"
+          src={imgSource}
+        />
         <div className="tw-followCard-info">
           <strong>{name}</strong>
-          <span className="tw-followCard-infoUserName"> @{userName}</span>
+          <span className="tw-followCard-infoUsername">@{userName}</span>
         </div>
       </header>
 
       <aside>
-        <button className="tw-followCard-button">Seguir</button>
+        <button className={mitocondria} onClick={pijita}>
+          {sexo}
+        </button>
       </aside>
     </article>
   );
